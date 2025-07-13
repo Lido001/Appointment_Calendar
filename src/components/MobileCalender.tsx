@@ -29,6 +29,7 @@ function generateDummyAppointments(): Appointment[] {
   const generated: Appointment[] = [];
   const today = new Date();
 
+
   const patientsCopy = [...patients];
   const doctorsCopy = [...doctors];
 
@@ -58,6 +59,7 @@ function generateDummyAppointments(): Appointment[] {
 
   return generated;
 }
+
 
 
 export default function MobileCalendarView() {

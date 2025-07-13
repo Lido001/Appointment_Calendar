@@ -56,6 +56,7 @@ function generateDummyAppointments(): Appointment[] {
 }
 
 
+
 export default function CalendarPage() {
   const [isMobile, setIsMobile] = useState(false);
 
