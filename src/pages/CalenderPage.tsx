@@ -17,43 +17,9 @@ import doctors from "../data/doctors.json";
 import { format } from "date-fns";
 import CalendarEventComponent from "../components/CalenderEventComponent";
 import CustomToolbar from "../components/CustomToolbar";
-import { v4 as uuidv4 } from "uuid";
 import MobileCalendarView from "../components/MobileCalender";
 
-function generateDummyAppointments(): Appointment[] {
-  const generated: Appointment[] = [];
-  const today = new Date();
 
-
-  const patientsCopy = [...patients];
-  const doctorsCopy = [...doctors];
-
-  for (let i = -3; i <= 3; i++) {
-    const date = new Date();
-    date.setDate(today.getDate() + i);
-
-    const count = Math.floor(Math.random() * 3) + 1;
-    for (let j = 0; j < count; j++) {
-      const hour = 9 + Math.floor(Math.random() * 8);
-      const start = new Date(date);
-      start.setHours(hour, 0, 0, 0);
-      const end = new Date(start.getTime() + 30 * 60 * 1000);
-
-      const randomPatient = patientsCopy[Math.floor(Math.random() * patientsCopy.length)];
-      const randomDoctor = doctorsCopy[Math.floor(Math.random() * doctorsCopy.length)];
-
-      generated.push({
-        id: uuidv4(),
-        start,
-        end,
-        patientId: randomPatient.id,
-        doctorId: randomDoctor.id,
-      });
-    }
-  }
-
-  return generated;
-}
 
 
 
@@ -93,9 +59,9 @@ function DesktopCalendarPage() {
     if (stored) {
       dispatch(setAppointments(JSON.parse(stored)));
     } else {
-      const dummyData = generateDummyAppointments();
-      dispatch(setAppointments(dummyData));
-      localStorage.setItem("appointments", JSON.stringify(dummyData));
+        const dummyData: Appointment[] = [];
+        localStorage.setItem("appointments", JSON.stringify(dummyData));
+        dispatch(setAppointments(dummyData));
     }
   }, [dispatch]);
 
