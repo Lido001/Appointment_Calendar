@@ -24,6 +24,10 @@ function generateDummyAppointments(): Appointment[] {
   const generated: Appointment[] = [];
   const today = new Date();
 
+
+  const patientsCopy = [...patients];
+  const doctorsCopy = [...doctors];
+
   for (let i = -3; i <= 3; i++) {
     const date = new Date();
     date.setDate(today.getDate() + i);
@@ -35,9 +39,8 @@ function generateDummyAppointments(): Appointment[] {
       start.setHours(hour, 0, 0, 0);
       const end = new Date(start.getTime() + 30 * 60 * 1000);
 
-      const randomPatient =
-        patients[Math.floor(Math.random() * patients.length)];
-      const randomDoctor = doctors[Math.floor(Math.random() * doctors.length)];
+      const randomPatient = patientsCopy[Math.floor(Math.random() * patientsCopy.length)];
+      const randomDoctor = doctorsCopy[Math.floor(Math.random() * doctorsCopy.length)];
 
       generated.push({
         id: uuidv4(),
@@ -51,6 +54,7 @@ function generateDummyAppointments(): Appointment[] {
 
   return generated;
 }
+
 
 export default function CalendarPage() {
   const [isMobile, setIsMobile] = useState(false);
